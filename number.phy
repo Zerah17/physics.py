@@ -1,0 +1,43 @@
+# stats.py
+# Functions to calculate sum, average, median and mode of a list of numbers
+
+from statistics import median, multimode
+
+def sum_of_numbers(numbers):
+    """Return the sum of numbers in a list."""
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+def average_of_numbers(numbers):
+    """Return the average / mean of numbers in a list."""
+    if len(numbers) == 0:
+        return None  # Cannot calculate average of an empty list
+
+    total = sum_of_numbers(numbers)
+    return total / len(numbers)
+
+def median_and_mode(numbers):
+    """Return the median and mode of numbers in a list.
+    Returns: (median, mode)
+    If there are multiple modes, mode will be a list.
+    """
+    if len(numbers) == 0:
+        return None, None
+    med = median(numbers)
+    modes = multimode(numbers)
+    # If only one mode, return it as a single value, not a list
+    if len(modes) == 1:
+        mod = modes[0]
+    else:
+        mod = modes
+    return med, mod
+# Example to test the functions
+if __name__ == "__main__":
+    my_list = [2, 4, 4, 5, 6, 8, 10]
+
+    print("List:", my_list)
+    print("Sum:", sum_of_numbers(my_list))
+    print("Average:", average_of_numbers(my_list))
+    print("Median and Mode:", median_and_mode(my_list))
